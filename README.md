@@ -14,16 +14,9 @@ A comprehensive Standard Operating Procedures (SOP) management plugin for Voile 
 
 ## Installation
 
-### 1. Add to Voile's `mix.exs`
+### 1. Place Plugin in plugins/ Directory
 
-```elixir
-defp deps do
-  [
-    # ... other deps
-    {:voile_sop_manager, path: "plugins/voile_sop_manager"}
-  ]
-end
-```
+The plugin should be located at `plugins/voile_sop_manager/`. Plugins are loaded at runtime by Voile's PluginManager - **do NOT add the plugin to Voile's `mix.exs` dependencies**.
 
 ### 2. Add CDN Links for EasyMDE and Mermaid
 
@@ -60,8 +53,8 @@ let liveSocket = new LiveSocket("/live", Socket, {
 
 ### 4. Install and Activate
 
-1. Run `mix deps.get`
-2. Build and deploy your Voile application
+1. Build and deploy your Voile application (the plugin code is included automatically)
+2. Start the Voile server
 3. Navigate to Admin → Settings → Plugins
 4. Find "SOP Manager" and click Install
 5. Activate the plugin

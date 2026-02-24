@@ -4,6 +4,9 @@ defmodule VoileSopManager.Web.Live.ShowLive do
   """
   use Phoenix.LiveView
 
+  import Phoenix.HTML
+  import Phoenix.Component
+
   alias VoileSopManager.{Sop, Sops, Acknowledgements}
 
   @impl true
@@ -78,7 +81,7 @@ defmodule VoileSopManager.Web.Live.ShowLive do
       <!-- Action buttons based on status -->
       <div class="flex gap-2 flex-wrap">
         <.link :if={@sop.status == "draft"}
-               navigate={~p"/manage/plugins/sop_manager/#{@sop.id}/edit"}
+               navigate={"/manage/plugins/sop_manager/#{@sop.id}/edit"}
                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
           Edit
         </.link>
@@ -118,7 +121,7 @@ defmodule VoileSopManager.Web.Live.ShowLive do
                 class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
           Retire
         </button>
-        <.link navigate={~p"/manage/plugins/sop_manager/"}
+        <.link navigate="/manage/plugins/sop_manager/"
                class="px-4 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition">
           ← Back to List
         </.link>
@@ -142,14 +145,14 @@ defmodule VoileSopManager.Web.Live.ShowLive do
       <!-- Purpose & Scope -->
       <div :if={@sop.purpose} class="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
         <h2 class="text-lg font-semibold mb-3">Purpose & Scope</h2>
-        <div phx-hook="MermaidRenderer" id="sop-purpose-#{@sop.id}" class="prose dark:prose-invert max-w-none">
+        <div phx-hook="MermaidRenderer" id={"sop-purpose-#{@sop.id}"} class="prose dark:prose-invert max-w-none">
           <%= raw(render_markdown(@sop.purpose)) %>
         </div>
       </div>
 
       <!-- Main Content -->
       <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-        <div phx-hook="MermaidRenderer" id="sop-content-#{@sop.id}" class="prose dark:prose-invert max-w-none">
+        <div phx-hook="MermaidRenderer" id={"sop-content-#{@sop.id}"} class="prose dark:prose-invert max-w-none">
           <%= raw(render_markdown(@sop.content || "_No content yet._")) %>
         </div>
       </div>
@@ -250,7 +253,7 @@ defmodule VoileSopManager.Web.Live.ShowLive do
 
   # Restore mermaid blocks with proper rendering markup
   defp restore_mermaid_blocks(html, mermaid_blocks) do
-    Enum.reduce(mermaid_blocks, html, fn {index, code}, acc ->
+    Enum.reduce(mermaid_blocks, html, fn {_index, code}, acc ->
       mermaid_html = """
       <div class="mermaid-diagram my-4 p-4 bg-gray-50 rounded-lg overflow-x-auto">
         <pre class="mermaid">#{String.trim(code)}</pre>

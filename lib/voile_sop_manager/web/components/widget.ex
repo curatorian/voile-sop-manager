@@ -4,6 +4,8 @@ defmodule VoileSopManager.Web.Components.Widget do
   """
   use Phoenix.LiveComponent
 
+  import Phoenix.Component
+
   alias VoileSopManager.Sops
 
   @impl true

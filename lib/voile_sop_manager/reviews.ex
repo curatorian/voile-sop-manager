@@ -4,6 +4,7 @@ defmodule VoileSopManager.Reviews do
   """
 
   import Ecto.Query
+  @compile {:no_warn_undefined, Voile.Repo}
   alias Voile.Repo
   alias VoileSopManager.{SopReview, Sop}
 

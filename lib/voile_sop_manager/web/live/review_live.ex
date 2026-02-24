@@ -4,6 +4,8 @@ defmodule VoileSopManager.Web.Live.ReviewLive do
   """
   use Phoenix.LiveView
 
+  import Phoenix.Component
+
   alias VoileSopManager.{Sops, Sop}
 
   @impl true
@@ -23,7 +25,7 @@ defmodule VoileSopManager.Web.Live.ReviewLive do
       <!-- Header -->
       <div class="flex items-center justify-between">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white">📋 SOP Review Queue</h2>
-        <.link navigate={~p"/manage/plugins/sop_manager/"}
+        <.link navigate="/manage/plugins/sop_manager/"
                class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
           ← Back to List
         </.link>
@@ -42,7 +44,7 @@ defmodule VoileSopManager.Web.Live.ReviewLive do
             <div class="flex items-start justify-between">
               <div>
                 <p class="font-mono text-sm text-gray-500"><%= sop.code %></p>
-                <.link navigate={~p"/manage/plugins/sop_manager/#{sop.id}"}
+                <.link navigate={"/manage/plugins/sop_manager/#{sop.id}"}
                        class="font-medium text-gray-900 hover:text-blue-600">
                   <%= sop.title %>
                 </.link>
@@ -76,7 +78,7 @@ defmodule VoileSopManager.Web.Live.ReviewLive do
             <div class="flex items-start justify-between">
               <div>
                 <p class="font-mono text-sm text-gray-500"><%= sop.code %></p>
-                <.link navigate={~p"/manage/plugins/sop_manager/#{sop.id}"}
+                <.link navigate={"/manage/plugins/sop_manager/#{sop.id}"}
                        class="font-medium text-gray-900 hover:text-blue-600">
                   <%= sop.title %>
                 </.link>
@@ -85,7 +87,7 @@ defmodule VoileSopManager.Web.Live.ReviewLive do
                 </p>
               </div>
               <div class="flex gap-2">
-                <.link navigate={~p"/manage/plugins/sop_manager/#{sop.id}"}
+                <.link navigate={"/manage/plugins/sop_manager/#{sop.id}"}
                        class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
                   Review
                 </.link>
@@ -108,7 +110,7 @@ defmodule VoileSopManager.Web.Live.ReviewLive do
             <div class="flex items-start justify-between">
               <div>
                 <p class="font-mono text-sm text-gray-500"><%= sop.code %></p>
-                <.link navigate={~p"/manage/plugins/sop_manager/#{sop.id}"}
+                <.link navigate={"/manage/plugins/sop_manager/#{sop.id}"}
                        class="font-medium text-gray-900 hover:text-blue-600">
                   <%= sop.title %>
                 </.link>
@@ -117,7 +119,7 @@ defmodule VoileSopManager.Web.Live.ReviewLive do
                 </p>
               </div>
               <div class="flex gap-2">
-                <.link navigate={~p"/manage/plugins/sop_manager/#{sop.id}"}
+                <.link navigate={"/manage/plugins/sop_manager/#{sop.id}"}
                        class="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">
                   Approve
                 </.link>

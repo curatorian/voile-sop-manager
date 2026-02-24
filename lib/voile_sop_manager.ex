@@ -1,4 +1,8 @@
 defmodule VoileSopManager do
+  @compile {:no_warn_undefined, Voile.Plugin}
+  @compile {:no_warn_undefined, Voile.Repo}
+  @compile {:no_warn_undefined, Voile.Plugins}
+
   @moduledoc """
   SOP Manager Plugin for Voile - Full lifecycle management for Standard Operating Procedures.
 

@@ -4,6 +4,7 @@ defmodule VoileSopManager.Sops do
   """
 
   import Ecto.Query
+  @compile {:no_warn_undefined, Voile.Repo}
   alias Voile.Repo
   alias VoileSopManager.{Sop, SopRevision}
 

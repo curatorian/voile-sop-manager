@@ -4,6 +4,8 @@ defmodule VoileSopManager.Web.Live.EditorLive do
   """
   use Phoenix.LiveView
 
+  import Phoenix.Component
+
   alias VoileSopManager.{Sop, Sops, Settings}
 
   @impl true
@@ -43,7 +45,7 @@ defmodule VoileSopManager.Web.Live.EditorLive do
         {:noreply,
          socket
          |> put_flash(:info, "SOP saved successfully.")
-         |> push_navigate(to: ~p"/manage/plugins/sop_manager/#{saved_sop.id}")}
+         |> push_navigate(to: "/manage/plugins/sop_manager/#{saved_sop.id}")}
 
       {:error, changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
@@ -160,7 +162,7 @@ defmodule VoileSopManager.Web.Live.EditorLive do
           <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
             Save Draft
           </button>
-          <.link navigate={~p"/manage/plugins/sop_manager/"} class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
+          <.link navigate="/manage/plugins/sop_manager/" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition">
             Cancel
           </.link>
         </div>

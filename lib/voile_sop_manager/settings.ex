@@ -4,6 +4,7 @@ defmodule VoileSopManager.Settings do
   """
 
   @plugin_id "sop_manager"
+  @compile {:no_warn_undefined, Voile.Plugins}
 
   @doc """
   Gets a setting value by key, with an optional default.

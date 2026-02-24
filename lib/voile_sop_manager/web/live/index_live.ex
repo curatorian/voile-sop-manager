@@ -4,7 +4,9 @@ defmodule VoileSopManager.Web.Live.IndexLive do
   """
   use Phoenix.LiveView
 
-  alias VoileSopManager.{Sops, Sop, Settings}
+  import Phoenix.Component
+
+  alias VoileSopManager.{Sops, Sop}
 
   @impl true
   def mount(_params, _session, socket) do
@@ -30,12 +32,12 @@ defmodule VoileSopManager.Web.Live.IndexLive do
   @impl true
   def handle_event("filter", %{"status" => status, "department" => dept}, socket) do
     params = %{status: status, department: dept}
-    {:noreply, push_patch(socket, to: ~p"/manage/plugins/sop_manager/?#{params}")}
+    {:noreply, push_patch(socket, to: "/manage/plugins/sop_manager/?#{URI.encode_query(params)}")}
   end
 
   @impl true
   def handle_event("clear_filter", _params, socket) do
-    {:noreply, push_patch(socket, to: ~p"/manage/plugins/sop_manager/")}
+    {:noreply, push_patch(socket, to: "/manage/plugins/sop_manager/")}
   end
 
   @impl true
@@ -45,7 +47,7 @@ defmodule VoileSopManager.Web.Live.IndexLive do
       <!-- Header -->
       <div class="flex items-center justify-between">
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white">📋 SOP Manager</h2>
-        <.link navigate={~p"/manage/plugins/sop_manager/new"}
+        <.link navigate="/manage/plugins/sop_manager/new"
                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
           + New SOP
         </.link>
@@ -64,7 +66,7 @@ defmodule VoileSopManager.Web.Live.IndexLive do
       <div :if={@overdue != []}
            class="bg-amber-50 border border-amber-200 rounded-lg p-4 text-amber-800">
         ⚠️ <strong><%= length(@overdue) %> SOP(s)</strong> are overdue for review.
-        <.link navigate={~p"/manage/plugins/sop_manager/review"} class="underline ml-2">
+        <.link navigate="/manage/plugins/sop_manager/review" class="underline ml-2">
           View review queue →
         </.link>
       </div>
@@ -87,7 +89,7 @@ defmodule VoileSopManager.Web.Live.IndexLive do
             <tr :for={sop <- @sops} class="hover:bg-gray-50 dark:hover:bg-gray-700">
               <td class="px-6 py-4 text-sm font-mono text-gray-600"><%= sop.code %></td>
               <td class="px-6 py-4 text-sm font-medium text-gray-900 dark:text-white">
-                <.link navigate={~p"/manage/plugins/sop_manager/#{sop.id}"}>
+                <.link navigate={"/manage/plugins/sop_manager/#{sop.id}"}>
                   <%= sop.title %>
                 </.link>
               </td>
@@ -104,7 +106,7 @@ defmodule VoileSopManager.Web.Live.IndexLive do
                 </span>
               </td>
               <td class="px-6 py-4 text-right">
-                <.link navigate={~p"/manage/plugins/sop_manager/#{sop.id}/edit"}
+                <.link navigate={"/manage/plugins/sop_manager/#{sop.id}/edit"}
                        class="text-sm text-blue-600 hover:underline">
                   Edit
                 </.link>
@@ -114,7 +116,7 @@ defmodule VoileSopManager.Web.Live.IndexLive do
         </table>
 
         <div :if={@sops == []} class="text-center py-12 text-gray-500">
-          No SOPs found. <.link navigate={~p"/manage/plugins/sop_manager/new"} class="text-blue-600">Create the first one.</.link>
+          No SOPs found. <.link navigate="/manage/plugins/sop_manager/new" class="text-blue-600">Create the first one.</.link>
         </div>
       </div>
     </div>
